@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>EcoTurismo Explorer - Viajes con Propósito</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e2f;
+            background-color: #faf9f2;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Encabezado */
+        header {
+            background: linear-gradient(135deg, #1e3c2c 0%, #2a5a3a 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 6px solid #f4c542;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            word-spacing: 4px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* Navegacion simple */
+        nav {
+            background-color: #2c5a3b;
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border-radius: 30px;
+        }
+
+        nav a:hover {
+            background-color: #f4c542;
+            color: #1e3c2c;
+        }
+
+        /* Hero / banner */
+        .hero {
+            background: linear-gradient(rgba(30, 60, 40, 0.7), rgba(30, 60, 40, 0.7)), 
+                        url('./cusco_general.jpg');
+            background-size: cover;
+            background-position: center 40%;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: rgba(0,0,0,0.4);
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        /* Secciones generales */
+        section {
+            margin: 3rem 0;
+            scroll-margin-top: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1e3c2c;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #f4c542;
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Tarjetas de servicios */
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            flex: 1 1 280px;
+            max-width: 320px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            background-color: #cbd5c0;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card:nth-child(1) .card-img {
+            background-image: url('./turismo_montana.jpg');
+        }
+        .card:nth-child(2) .card-img {
+            background-image: url('./rafting.jpg');
+        }
+        .card:nth-child(3) .card-img {
+            background-image: url('./fauna.jpg');
+        }
+        .card:nth-child(4) .card-img {
+            background-image: url('./nocturno.jpg');
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            margin-bottom: 0.8rem;
+            color: #2a5a3a;
+            font-size: 1.5rem;
+        }
+
+        .card-content p {
+            color: #3e5a3c;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #f4c542;
+            color: #1e3c2c;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Listado de destinos destacados */
+        .destinos-lista {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+        }
+
+        .destino-item {
+            background: white;
+            border-radius: 16px;
+            padding: 1rem;
+            flex: 1 1 250px;
+            text-align: center;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+            border-left: 6px solid #f4c542;
+        }
+
+        .destino-item h4 {
+            font-size: 1.4rem;
+            color: #2a5a3a;
+            margin-bottom: 0.5rem;
+        }
+
+        .destino-item p {
+            margin: 0.5rem 0;
+        }
+
+        .precio {
+            font-weight: bold;
+            color: #c97e2a;
+            font-size: 1.2rem;
+            margin-top: 0.6rem;
+        }
+
+        /* Testimonios */
+        .testimonios {
+            background-color: #e9f0e3;
+            padding: 2rem;
+            border-radius: 40px;
+            margin: 2rem 0;
+        }
+
+        .test-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            flex: 1 1 260px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .test-card p {
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        .cliente {
+            font-weight: bold;
+            color: #f4c542;
+            background-color: #2c5a3b;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+        }
+
+        /* Informacion de contacto */
+        .contacto-info {
+            background-color: #2c5a3b;
+            color: white;
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+        }
+
+        .contacto-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .contacto-detalle {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .contacto-detalle div {
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e3c2c;
+            color: #cfdec7;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #f4c542;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Boton informativo sin JS */
+        .btn-info {
+            display: inline-block;
+            background-color: #f4c542;
+            color: #1e3c2c;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 0.8rem;
+            transition: background 0.2s;
+        }
+
+        .btn-info:hover {
+            background-color: #e0b034;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>ECOTURISMO CUSCO</h1>
+        <p>Viajes sostenibles - Naturaleza viva - Aventura responsable</p>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#destinos">Destinos</a></li>
+            <li><a href="#testimonios">Testimonios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <div class="hero" id="inicio">
+        <div class="container">
+            <h2>Descubre la Naturaleza como Nunca Antes</h2>
+            <p>Guias expertos, grupos reducidos y compromiso ecologico con el Cusco</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Seccion Servicios Turisticos -->
+        <section id="servicios">
+            <h2 class="section-title">Nuestros Servicios Turisticos</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-img"></div>
+                    <div class="card-content">
+                        <span class="badge">Aventura</span>
+                        <h3>Senderismo y Trekking</h3>
+                        <p>Rutas guiadas por montanas y selvas tropicales. Niveles para principiantes y expertos. Equipo de seguridad incluido.</p>
+                        <a href="#" class="btn-info">Mas informacion</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img"></div>
+                    <div class="card-content">
+                        <span class="badge">Acuatico</span>
+                        <h3>Rafting & Kayak</h3>
+                        <p>Aguas bravas en rios cristalinos. Disfruta de la adrenalina en medio de canones y vegetacion exuberante.</p>
+                        <a href="#" class="btn-info">Mas informacion</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img"></div>
+                    <div class="card-content">
+                        <span class="badge">Ecoturismo</span>
+                        <h3>Avistamiento de Fauna</h3>
+                        <p>Observa monos, aves exoticas y jaguares en su habitat natural. Con binoculares y guias biologos.</p>
+                        <a href="#" class="btn-info">Mas informacion</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img"></div>
+                    <div class="card-content">
+                        <span class="badge">Estadia</span>
+                        <h3>Campamento Nocturno</h3>
+                        <p>Pasa la noche bajo las estrellas. Fogata, historias y sonidos de la selva. Incluye cena y tiendas ecologicas.</p>
+                        <a href="#" class="btn-info">Mas informacion</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seccion Destinos Destacados -->
+        <section id="destinos">
+            <h2 class="section-title">Destinos Imperdibles</h2>
+            <div class="destinos-lista">
+                <div class="destino-item">
+                    <h4>Valle Encantado</h4>
+                    <p>Senderos entre cascadas y bosques nativos. Duracion: 2 dias.</p>
+                    <div class="precio">Desde $120 USD</div>
+                </div>
+                <div class="destino-item">
+                    <h4>Rio Esmeralda</h4>
+                    <p>Rafting nivel intermedio, aguas turquesa y pausas para nadar.</p>
+                    <div class="precio">Desde $85 USD</div>
+                </div>
+                <div class="destino-item">
+                    <h4>Reserva Jaguar</h4>
+                    <p>Safari fotografico y recorrido nocturno. Incluye alojamiento.</p>
+                    <div class="precio">Desde $210 USD</div>
+                </div>
+                <div class="destino-item">
+                    <h4>Montana Nebulosa</h4>
+                    <p>Trekking a 3000msnm, vistas increibles, transporte desde la ciudad.</p>
+                    <div class="precio">Desde $95 USD</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 1.8rem; font-size: 0.95rem;">*Precios por persona, incluyen guia certificado y seguro basico.</p>
+        </section>
+
+        <!-- Seccion Testimonios / Clientes -->
+        <section id="testimonios">
+            <h2 class="section-title">Lo que dicen nuestros viajeros</h2>
+            <div class="testimonios">
+                <div class="test-grid">
+                    <div class="test-card">
+                        <p>"Experiencia inolvidable. El equipo de guias es super profesional y respetuoso con el ambiente. Recomiendo el tour de avistamiento de aves."</p>
+                        <div class="cliente">— Laura M.</div>
+                    </div>
+                    <div class="test-card">
+                        <p>"Hice rafting en Rio Esmeralda, seguridad total y mucha diversion. La comida del campamento deliciosa. Volvere por el trekking."</p>
+                        <div class="cliente">— Carlos T.</div>
+                    </div>
+                    <div class="test-card">
+                        <p>"Viaje en familia, nuestros hijos disfrutaron el campamento nocturno. Todo muy organizado y con un gran compromiso ecologico."</p>
+                        <div class="cliente">— Sofia R.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seccion Informacion adicional / Por que elegirnos -->
+        <section>
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; background: #fff7e8; border-radius: 28px; padding: 2rem;">
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="color: #2a5a3a; margin-bottom: 1rem;">Ventajas de viajar con nosotros</h3>
+                    <ul style="list-style-type: none; line-height: 2;">
+                        <li>✓ Guias locales certificados</li>
+                        <li>✓ Grupos reducidos (max 12 personas)</li>
+                        <li>✓ Practicas de turismo responsable</li>
+                        <li>✓ Equipamiento de alta calidad</li>
+                        <li>✓ Seguro de asistencia medica</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="color: #2a5a3a; margin-bottom: 1rem;">Nuestro compromiso ambiental</h3>
+                    <p>Por cada reserva plantamos un arbol nativo. Usamos tecnologia solar en campamentos y promovemos el turismo sin plastico. Colaboramos con comunidades indigenas para proteger areas naturales.</p>
+                    <a href="#" class="btn-info" style="margin-top: 1rem;">Saber mas</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seccion Contacto y mas datos -->
+        <section id="contacto">
+            <h2 class="section-title">Contacta con nosotros</h2>
+            <div class="contacto-info">
+                <h3>Listo para tu proxima aventura?</h3>
+                <p>Escribenos o llamanos para recibir asesoria personalizada y disponibilidad de fechas.</p>
+                <div class="contacto-detalle">
+                    <div>Telefono: +991 921 123</div>
+                    <div>Email: info@ecoturismoexplorer.com</div>
+                    <div>Oficina: Cusco ,San Sebastian jr-2</div>
+                </div>
+                <p style="margin-top: 1.8rem; font-size: 0.9rem;">Horario de atencion: Lunes a Sabado 8:00am - 6:00pm</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" class="btn-info" style="background-color: white; color:#1e3c2c;">Solicitar informacion</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Ecoturismo Explorer - Turismo sostenible y de naturaleza.</p>
+        <p>Siguenos en redes sociales: Facebook | Instagram | Youtube</p>
+        <p><a href="#">Politica de privacidad</a> | <a href="#">Terminos y condiciones</a> | <a href="#">Libro de reclamaciones</a></p>
+        <p style="margin-top: 0.8rem; font-size: 0.75rem;">Reserva tu experiencia hoy.</p>
+    </div>
+</footer>
+
+</body>
+</html>
